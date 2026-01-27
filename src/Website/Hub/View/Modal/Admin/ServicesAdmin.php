@@ -27,8 +27,8 @@ use Core\Mod\Social\Models\Post as SocialPost;
 use Core\Mod\Support\Models\Conversation;
 use Core\Mod\Support\Models\Mailbox;
 use Core\Mod\Support\Models\Thread;
-use Core\Mod\Tenant\Models\Workspace;
-use Core\Mod\Tenant\Services\WorkspaceService;
+use Core\Tenant\Models\Workspace;
+use Core\Tenant\Services\WorkspaceService;
 use Core\Mod\Trust\Models\Campaign as TrustCampaign;
 use Core\Mod\Trust\Models\Notification as TrustNotification;
 // TODO: Bio service admin moved to Host UK app (Mod\Bio)

@@ -9,8 +9,8 @@
  * Uses translation keys to get expected values - tests won't break on copy changes.
  */
 
-use Core\Mod\Tenant\Models\User;
-use Core\Mod\Tenant\Models\Workspace;
+use Core\Tenant\Models\User;
+use Core\Tenant\Models\Workspace;
 
 describe('Hub Dashboard', function () {
     beforeEach(function () {

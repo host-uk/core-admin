@@ -2,7 +2,7 @@
 
 namespace Website\Hub\View\Modal\Admin;
 
-use Core\Mod\Tenant\Services\EntitlementService;
+use Core\Tenant\Services\EntitlementService;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Auth;
 use Livewire\Component;

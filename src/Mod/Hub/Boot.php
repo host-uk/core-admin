@@ -9,7 +9,7 @@ use Core\Front\Admin\AdminMenuRegistry;
 use Core\Front\Admin\Concerns\HasMenuPermissions;
 use Core\Front\Admin\Contracts\AdminMenuProvider;
 use Illuminate\Support\ServiceProvider;
-use Core\Mod\Tenant\Services\WorkspaceService;
+use Core\Tenant\Services\WorkspaceService;
 
 class Boot extends ServiceProvider implements AdminMenuProvider
 {
@@ -262,7 +262,7 @@ class Boot extends ServiceProvider implements AdminMenuProvider
         $event->livewire('hub.admin.honeypot', View\Modal\Admin\Honeypot::class);
 
         // Workspace management (Tenant module)
-        $event->livewire('tenant.admin.workspace-manager', \Core\Mod\Tenant\View\Modal\Admin\WorkspaceManager::class);
-        $event->livewire('tenant.admin.workspace-details', \Core\Mod\Tenant\View\Modal\Admin\WorkspaceDetails::class);
+        $event->livewire('tenant.admin.workspace-manager', \Core\Tenant\View\Modal\Admin\WorkspaceManager::class);
+        $event->livewire('tenant.admin.workspace-details', \Core\Tenant\View\Modal\Admin\WorkspaceDetails::class);
     }
 }

@@ -9,7 +9,7 @@ declare(strict_types=1);
  * Each test asserts meaningful HTML content, not just status codes.
  */
 
-use Core\Mod\Tenant\Models\User;
+use Core\Tenant\Models\User;
 
 beforeEach(function () {
     $this->user = User::factory()->create([

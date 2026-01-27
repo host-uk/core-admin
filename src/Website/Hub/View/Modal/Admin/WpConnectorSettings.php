@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Website\Hub\View\Modal\Admin;
 
-use Core\Mod\Tenant\Models\Workspace;
+use Core\Tenant\Models\Workspace;
 use Flux\Flux;
 use Illuminate\Contracts\View\View;
 use Illuminate\Support\Facades\Http;

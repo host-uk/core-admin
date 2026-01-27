@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace Website\Hub\View\Modal\Admin;
 
-use Core\Mod\Tenant\Models\Workspace;
-use Core\Mod\Tenant\Services\WorkspaceService;
+use Core\Tenant\Models\Workspace;
+use Core\Tenant\Services\WorkspaceService;
 use Flux\Flux;
 use Illuminate\Contracts\View\View;
 use Illuminate\Support\Facades\Cache;

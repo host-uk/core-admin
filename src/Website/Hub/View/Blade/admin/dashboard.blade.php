@@ -16,7 +16,7 @@
                 </div>
                 <div>
                     <p class="text-sm text-zinc-400">Users</p>
-                    <p class="text-2xl font-semibold text-zinc-100">{{ \Core\Mod\Tenant\Models\User::count() }}</p>
+                    <p class="text-2xl font-semibold text-zinc-100">{{ \Core\Tenant\Models\User::count() }}</p>
                 </div>
             </div>
         </div>

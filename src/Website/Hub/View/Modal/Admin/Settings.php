@@ -11,10 +11,10 @@ use Livewire\Attributes\Url;
 use Livewire\Attributes\Validate;
 use Livewire\Component;
 use Core\Mod\Social\Models\Setting;
-use Core\Mod\Tenant\Mail\AccountDeletionRequested;
-use Core\Mod\Tenant\Models\AccountDeletionRequest;
-use Core\Mod\Tenant\Models\User;
-use Core\Mod\Tenant\Services\UserStatsService;
+use Core\Tenant\Mail\AccountDeletionRequested;
+use Core\Tenant\Models\AccountDeletionRequest;
+use Core\Tenant\Models\User;
+use Core\Tenant\Services\UserStatsService;
 
 class Settings extends Component
 {
@@ -214,7 +214,7 @@ class Settings extends Component
     public function requestAccountDeletion(): void
     {
         // Get the base user model for the app
-        $user = \Core\Mod\Tenant\Models\User::findOrFail(Auth::id());
+        $user = \Core\Tenant\Models\User::findOrFail(Auth::id());
 
         // Create the deletion request
         $deletionRequest = AccountDeletionRequest::createForUser($user, $this->deleteReason ?: null);

@@ -5,9 +5,9 @@ declare(strict_types=1);
 namespace Core\Mod\Hub\Tests\Feature;
 
 use Core\Mod\Hub\View\Modal\Admin\WorkspaceSwitcher;
-use Core\Mod\Tenant\Models\User;
-use Core\Mod\Tenant\Models\Workspace;
-use Core\Mod\Tenant\Services\WorkspaceService;
+use Core\Tenant\Models\User;
+use Core\Tenant\Models\Workspace;
+use Core\Tenant\Services\WorkspaceService;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Livewire\Livewire;
 use Tests\TestCase;

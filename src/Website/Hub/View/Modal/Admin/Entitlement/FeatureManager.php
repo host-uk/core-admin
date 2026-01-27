@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Website\Hub\View\Modal\Admin\Entitlement;
 
-use Core\Mod\Tenant\Models\Feature;
+use Core\Tenant\Models\Feature;
 use Livewire\Attributes\Computed;
 use Livewire\Attributes\Layout;
 use Livewire\Attributes\Title;

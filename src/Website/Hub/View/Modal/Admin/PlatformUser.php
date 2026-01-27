@@ -6,14 +6,14 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
 use Livewire\Attributes\Computed;
 use Livewire\Component;
-use Core\Mod\Tenant\Enums\UserTier;
-use Core\Mod\Tenant\Models\AccountDeletionRequest;
-use Core\Mod\Tenant\Models\Boost;
-use Core\Mod\Tenant\Models\Feature;
-use Core\Mod\Tenant\Models\Package;
-use Core\Mod\Tenant\Models\User;
-use Core\Mod\Tenant\Models\Workspace;
-use Core\Mod\Tenant\Services\EntitlementService;
+use Core\Tenant\Enums\UserTier;
+use Core\Tenant\Models\AccountDeletionRequest;
+use Core\Tenant\Models\Boost;
+use Core\Tenant\Models\Feature;
+use Core\Tenant\Models\Package;
+use Core\Tenant\Models\User;
+use Core\Tenant\Models\Workspace;
+use Core\Tenant\Services\EntitlementService;
 
 class PlatformUser extends Component
 {

@@ -2,8 +2,8 @@
 
 namespace Website\Hub\View\Modal\Admin;
 
-use Core\Mod\Tenant\Enums\UserTier;
-use Core\Mod\Tenant\Models\User;
+use Core\Tenant\Enums\UserTier;
+use Core\Tenant\Models\User;
 use Illuminate\Support\Facades\Auth;
 use Livewire\Component;
 
@@ -33,7 +33,7 @@ class Profile extends Component
     public function mount(): void
     {
         $user = User::findOrFail(Auth::id());
-        $appUser = \Core\Mod\Tenant\Models\User::find(Auth::id());
+        $appUser = \Core\Tenant\Models\User::find(Auth::id());
 
         $this->userName = $user->name ?? 'User';
         $this->userEmail = $user->email ?? '';

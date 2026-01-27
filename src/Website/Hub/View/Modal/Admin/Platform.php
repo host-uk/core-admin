@@ -2,8 +2,8 @@
 
 namespace Website\Hub\View\Modal\Admin;
 
-use Core\Mod\Tenant\Enums\UserTier;
-use Core\Mod\Tenant\Models\User;
+use Core\Tenant\Enums\UserTier;
+use Core\Tenant\Models\User;
 use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\Cache;
 use Livewire\Component;

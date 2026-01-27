@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace Website\Hub\View\Modal\Admin;
 
 use Livewire\Attributes\On;
-use Core\Mod\Tenant\Services\WorkspaceService;
+use Core\Tenant\Services\WorkspaceService;
 use Livewire\Component;
 
 class WorkspaceSwitcher extends Component

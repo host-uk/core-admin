@@ -2,7 +2,7 @@
 
 namespace Website\Hub\View\Modal\Admin;
 
-use Core\Mod\Tenant\Services\WorkspaceService;
+use Core\Tenant\Services\WorkspaceService;
 use Illuminate\Pagination\LengthAwarePaginator;
 use Livewire\Attributes\Computed;
 use Livewire\Attributes\On;

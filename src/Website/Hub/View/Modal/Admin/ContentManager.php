@@ -11,8 +11,8 @@ use Livewire\WithPagination;
 use Core\Mod\Content\Models\ContentItem;
 use Core\Mod\Content\Models\ContentTaxonomy;
 use Core\Mod\Content\Models\ContentWebhookLog;
-use Core\Mod\Tenant\Models\Workspace;
-use Core\Mod\Tenant\Services\WorkspaceService;
+use Core\Tenant\Models\Workspace;
+use Core\Tenant\Services\WorkspaceService;
 
 /**
  * Content Manager component.

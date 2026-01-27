@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace Website\Hub\View\Modal\Admin;
 
-use Core\Mod\Tenant\Models\WaitlistEntry;
-use Core\Mod\Tenant\Notifications\WaitlistInviteNotification;
+use Core\Tenant\Models\WaitlistEntry;
+use Core\Tenant\Notifications\WaitlistInviteNotification;
 use Livewire\Attributes\Computed;
 use Livewire\Attributes\Title;
 use Livewire\Component;

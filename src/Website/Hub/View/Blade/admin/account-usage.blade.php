@@ -416,7 +416,7 @@
                                             @foreach($features as $feature)
                                                 @php
                                                     $workspace = auth()->user()?->defaultHostWorkspace();
-                                                    $check = $workspace ? app(\Core\Mod\Tenant\Services\EntitlementService::class)->can($workspace, $feature['code']) : null;
+                                                    $check = $workspace ? app(\Core\Tenant\Services\EntitlementService::class)->can($workspace, $feature['code']) : null;
                                                     $allowed = $check?->isAllowed() ?? false;
                                                     $limit = $check?->effectiveLimit ?? null;
                                                     $unlimited = $check?->isUnlimited ?? false;

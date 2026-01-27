@@ -2,7 +2,7 @@
 
 namespace Website\Hub\View\Modal\Admin;
 
-use Core\Mod\Tenant\Models\Feature;
+use Core\Tenant\Models\Feature;
 use Livewire\Component;
 
 class BoostPurchase extends Component

@@ -10,9 +10,9 @@ use Livewire\Attributes\Url;
 use Livewire\Component;
 use Core\Mod\Social\Actions\Common\UpdateOrCreateService;
 use Core\Mod\Social\Services\ServiceManager;
-use Core\Mod\Tenant\Models\Feature;
-use Core\Mod\Tenant\Models\Workspace;
-use Core\Mod\Tenant\Services\EntitlementService;
+use Core\Tenant\Models\Feature;
+use Core\Tenant\Models\Workspace;
+use Core\Tenant\Services\EntitlementService;
 
 class AccountUsage extends Component
 {

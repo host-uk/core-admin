@@ -57,8 +57,8 @@ Route::get('/entitlements/features', \Website\Hub\View\Modal\Admin\Entitlement\F
 Route::get('/admin/waitlist', \Website\Hub\View\Modal\Admin\WaitlistManager::class)->name('admin.waitlist');
 
 // Workspace management (admin only - Hades tier)
-// Route::get('/admin/workspaces', \Core\Mod\Tenant\View\Modal\Admin\WorkspaceManager::class)->name('admin.workspaces');
-// Route::get('/admin/workspaces/{id}', \Core\Mod\Tenant\View\Modal\Admin\WorkspaceDetails::class)->name('admin.workspaces.details')
+// Route::get('/admin/workspaces', \Core\Tenant\View\Modal\Admin\WorkspaceManager::class)->name('admin.workspaces');
+// Route::get('/admin/workspaces/{id}', \Core\Tenant\View\Modal\Admin\WorkspaceDetails::class)->name('admin.workspaces.details')
 //     ->where('id', '[0-9]+');
 
 // Service management (admin only - Hades tier)

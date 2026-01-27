@@ -11,10 +11,10 @@ use Livewire\Attributes\Title;
 use Livewire\Attributes\Url;
 use Livewire\Component;
 use Livewire\WithPagination;
-use Core\Mod\Tenant\Models\Boost;
-use Core\Mod\Tenant\Models\Feature;
-use Core\Mod\Tenant\Models\Package;
-use Core\Mod\Tenant\Models\WorkspacePackage;
+use Core\Tenant\Models\Boost;
+use Core\Tenant\Models\Feature;
+use Core\Tenant\Models\Package;
+use Core\Tenant\Models\WorkspacePackage;
 
 #[Title('Entitlements')]
 #[Layout('hub::admin.layouts.app')]
