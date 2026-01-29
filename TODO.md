@@ -41,12 +41,13 @@
   - **Completed:** January 2026
   - **File:** `tests/Feature/Menu/AdminMenuSystemTest.php`
 
-- [ ] **Test Coverage: HLCRF Components** - Test layout system
-  - [ ] Test HierarchicalLayoutBuilder parsing
-  - [ ] Test nested layout rendering
-  - [ ] Test self-documenting IDs (H-0, C-R-2, etc.)
-  - [ ] Test responsive breakpoints
-  - **Estimated effort:** 4-5 hours
+- [x] **Test Coverage: HLCRF Components** - Test layout system
+  - [x] Test HierarchicalLayoutBuilder parsing
+  - [x] Test nested layout rendering
+  - [x] Test self-documenting IDs (H-0, C-R-2, etc.)
+  - [x] Test responsive breakpoints
+  - **Completed:** January 2026
+  - **File:** `tests/Feature/Layout/HlcrfLayoutTest.php`
 
 ### Low Priority
 
@@ -237,5 +238,6 @@
 - [x] **Test Coverage: Teapot/Honeypot** - Bot detection, severity classification, rate limiting, header sanitization, model scopes (40+ tests)
 - [x] **Test Coverage: Search System** - SearchProviderRegistry, search execution, result aggregation, fuzzy matching, relevance scoring, SearchResult tests (60+ tests)
 - [x] **Test Coverage: Livewire Modals** - Modal opening/closing, events, data passing, validation, nested modals, lifecycle (50+ tests)
+- [x] **Test Coverage: HLCRF Components** - Layout variant parsing, nested rendering, self-documenting IDs, slot rendering, CSS structure (80+ tests)
 
 *See `changelog/2026/jan/` for completed features.*
