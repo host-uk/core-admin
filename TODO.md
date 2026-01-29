@@ -30,13 +30,14 @@
 
 ### Medium Priority
 
-- [ ] **Test Coverage: Admin Menu System** - Test menu building
-  - [ ] Test AdminMenuRegistry with multiple providers
-  - [ ] Test MenuItemBuilder with badges
-  - [ ] Test menu authorization (can/canAny)
-  - [ ] Test menu active state detection
-  - [ ] Test IconValidator
-  - **Estimated effort:** 2-3 hours
+- [x] **Test Coverage: Admin Menu System** - Test menu building
+  - [x] Test AdminMenuRegistry with multiple providers
+  - [x] Test MenuItemBuilder with badges
+  - [x] Test menu authorization (can/canAny)
+  - [x] Test menu active state detection
+  - [x] Test IconValidator
+  - **Completed:** January 2026
+  - **File:** `tests/Feature/Menu/AdminMenuSystemTest.php`
 
 - [ ] **Test Coverage: HLCRF Components** - Test layout system
   - [ ] Test HierarchicalLayoutBuilder parsing
@@ -47,12 +48,17 @@
 
 ### Low Priority
 
-- [ ] **Test Coverage: Teapot/Honeypot** - Test anti-spam
-  - [ ] Test TeapotController honeypot detection
-  - [ ] Test HoneypotHit recording
-  - [ ] Test automatic IP blocking
-  - [ ] Test hit pruning
-  - **Estimated effort:** 2-3 hours
+- [x] **Test Coverage: Teapot/Honeypot** - Test anti-spam
+  - [x] Test TeapotController honeypot detection
+  - [x] Test HoneypotHit recording
+  - [x] Test automatic IP blocking
+  - [x] Test bot detection patterns
+  - [x] Test severity classification
+  - [x] Test rate limiting for log flooding prevention
+  - [x] Test header sanitization
+  - [x] Test model scopes and statistics
+  - **Completed:** January 2026
+  - **File:** `tests/Feature/Honeypot/TeapotTest.php`
 
 ## Features & Enhancements
 
@@ -225,5 +231,7 @@
 - [x] **Guide: HLCRF Deep Dive** - Layout combinations, ID system, responsive patterns
 - [x] **API Reference: Components** - Form component props with authorization examples
 - [x] **Test Coverage: Form Components** - Authorization props testing for Button/Input/Select/Checkbox/Toggle/Textarea (52 tests)
+- [x] **Test Coverage: Admin Menu System** - AdminMenuRegistry, MenuItemBuilder, MenuItemGroup, IconValidator tests
+- [x] **Test Coverage: Teapot/Honeypot** - Bot detection, severity classification, rate limiting, header sanitization, model scopes (40+ tests)
 
 *See `changelog/2026/jan/` for completed features.*
