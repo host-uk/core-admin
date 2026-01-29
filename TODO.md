@@ -12,12 +12,13 @@
   - [ ] Test workspace-scoped search results
   - **Estimated effort:** 3-4 hours
 
-- [ ] **Test Coverage: Form Components** - Test authorization props
-  - [ ] Test Button component with :can/:cannot props
-  - [ ] Test Input component with authorization
-  - [ ] Test Select/Checkbox/Toggle with permissions
-  - [ ] Test workspace context in form components
-  - **Estimated effort:** 2-3 hours
+- [x] **Test Coverage: Form Components** - Test authorization props
+  - [x] Test Button component with :can/:cannot props
+  - [x] Test Input component with authorization
+  - [x] Test Select/Checkbox/Toggle with permissions
+  - [x] Test workspace context in form components
+  - **Completed:** January 2026
+  - **File:** `tests/Feature/Forms/AuthorizationTest.php`
 
 - [ ] **Test Coverage: Livewire Modals** - Test modal system
   - [ ] Test modal opening/closing
@@ -223,5 +224,6 @@
 - [x] **Guide: Creating Admin Panels** - Menu registration, modals, authorization, example module
 - [x] **Guide: HLCRF Deep Dive** - Layout combinations, ID system, responsive patterns
 - [x] **API Reference: Components** - Form component props with authorization examples
+- [x] **Test Coverage: Form Components** - Authorization props testing for Button/Input/Select/Checkbox/Toggle/Textarea (52 tests)
 
 *See `changelog/2026/jan/` for completed features.*
