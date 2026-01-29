@@ -21,13 +21,14 @@
   - **Completed:** January 2026
   - **File:** `tests/Feature/Forms/AuthorizationTest.php`
 
-- [ ] **Test Coverage: Livewire Modals** - Test modal system
-  - [ ] Test modal opening/closing
-  - [ ] Test file uploads in modals
-  - [ ] Test validation in modals
-  - [ ] Test nested modals
-  - [ ] Test modal events and lifecycle
-  - **Estimated effort:** 3-4 hours
+- [x] **Test Coverage: Livewire Modals** - Test modal system
+  - [x] Test modal opening/closing
+  - [x] Test validation in modals
+  - [x] Test nested modals
+  - [x] Test modal events and lifecycle
+  - [x] Test modal data passing
+  - **Completed:** January 2026
+  - **File:** `tests/Feature/Modal/LivewireModalTest.php`
 
 ### Medium Priority
 
@@ -235,5 +236,6 @@
 - [x] **Test Coverage: Admin Menu System** - AdminMenuRegistry, MenuItemBuilder, MenuItemGroup, IconValidator tests
 - [x] **Test Coverage: Teapot/Honeypot** - Bot detection, severity classification, rate limiting, header sanitization, model scopes (40+ tests)
 - [x] **Test Coverage: Search System** - SearchProviderRegistry, search execution, result aggregation, fuzzy matching, relevance scoring, SearchResult tests (60+ tests)
+- [x] **Test Coverage: Livewire Modals** - Modal opening/closing, events, data passing, validation, nested modals, lifecycle (50+ tests)
 
 *See `changelog/2026/jan/` for completed features.*
