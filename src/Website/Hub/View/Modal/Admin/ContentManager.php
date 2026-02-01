@@ -143,6 +143,8 @@ class ContentManager extends Component
 
     /**
      * Get content statistics for dashboard.
+     *
+     * Uses conditional aggregation to consolidate 16+ queries into 3.
      */
     #[Computed]
     public function stats(): array
@@ -153,31 +155,59 @@ class ContentManager extends Component
 
         $id = $this->currentWorkspace->id;
 
+        // Single query for all ContentItem stats using conditional counts
+        $contentStats = ContentItem::forWorkspace($id)
+            ->selectRaw('COUNT(*) as total')
+            ->selectRaw("SUM(CASE WHEN type = 'post' THEN 1 ELSE 0 END) as posts")
+            ->selectRaw("SUM(CASE WHEN type = 'page' THEN 1 ELSE 0 END) as pages")
+            ->selectRaw("SUM(CASE WHEN status = 'publish' THEN 1 ELSE 0 END) as published")
+            ->selectRaw("SUM(CASE WHEN status = 'draft' THEN 1 ELSE 0 END) as drafts")
+            ->selectRaw("SUM(CASE WHEN sync_status = 'synced' THEN 1 ELSE 0 END) as synced")
+            ->selectRaw("SUM(CASE WHEN sync_status = 'pending' THEN 1 ELSE 0 END) as pending")
+            ->selectRaw("SUM(CASE WHEN sync_status = 'failed' THEN 1 ELSE 0 END) as failed")
+            ->selectRaw("SUM(CASE WHEN sync_status = 'stale' THEN 1 ELSE 0 END) as stale")
+            ->selectRaw("SUM(CASE WHEN content_type = 'wordpress' THEN 1 ELSE 0 END) as wordpress")
+            ->selectRaw("SUM(CASE WHEN content_type = 'hostuk' THEN 1 ELSE 0 END) as hostuk")
+            ->selectRaw("SUM(CASE WHEN content_type = 'satellite' THEN 1 ELSE 0 END) as satellite")
+            ->first();
+
+        // Single query for taxonomy stats
+        $taxonomyStats = ContentTaxonomy::forWorkspace($id)
+            ->selectRaw("SUM(CASE WHEN type = 'category' THEN 1 ELSE 0 END) as categories")
+            ->selectRaw("SUM(CASE WHEN type = 'tag' THEN 1 ELSE 0 END) as tags")
+            ->first();
+
+        // Single query for webhook stats
+        $webhookStats = ContentWebhookLog::forWorkspace($id)
+            ->selectRaw('COUNT(*) as total')
+            ->selectRaw("SUM(CASE WHEN DATE(created_at) = ? THEN 1 ELSE 0 END) as today", [today()->toDateString()])
+            ->selectRaw("SUM(CASE WHEN status = 'failed' THEN 1 ELSE 0 END) as failed")
+            ->first();
+
         return [
-            'total' => ContentItem::forWorkspace($id)->count(),
-            'posts' => ContentItem::forWorkspace($id)->posts()->count(),
-            'pages' => ContentItem::forWorkspace($id)->pages()->count(),
-            'published' => ContentItem::forWorkspace($id)->published()->count(),
-            'drafts' => ContentItem::forWorkspace($id)->where('status', 'draft')->count(),
-            'synced' => ContentItem::forWorkspace($id)->where('sync_status', 'synced')->count(),
-            'pending' => ContentItem::forWorkspace($id)->where('sync_status', 'pending')->count(),
-            'failed' => ContentItem::forWorkspace($id)->where('sync_status', 'failed')->count(),
-            'stale' => ContentItem::forWorkspace($id)->where('sync_status', 'stale')->count(),
-            'categories' => ContentTaxonomy::forWorkspace($id)->categories()->count(),
-            'tags' => ContentTaxonomy::forWorkspace($id)->tags()->count(),
-            'webhooks_today' => ContentWebhookLog::forWorkspace($id)
-                ->whereDate('created_at', today())
-                ->count(),
-            'webhooks_failed' => ContentWebhookLog::forWorkspace($id)->failed()->count(),
-            // Content by source type
-            'wordpress' => ContentItem::forWorkspace($id)->wordpress()->count(),
-            'hostuk' => ContentItem::forWorkspace($id)->hostuk()->count(),
-            'satellite' => ContentItem::forWorkspace($id)->satellite()->count(),
+            'total' => (int) ($contentStats->total ?? 0),
+            'posts' => (int) ($contentStats->posts ?? 0),
+            'pages' => (int) ($contentStats->pages ?? 0),
+            'published' => (int) ($contentStats->published ?? 0),
+            'drafts' => (int) ($contentStats->drafts ?? 0),
+            'synced' => (int) ($contentStats->synced ?? 0),
+            'pending' => (int) ($contentStats->pending ?? 0),
+            'failed' => (int) ($contentStats->failed ?? 0),
+            'stale' => (int) ($contentStats->stale ?? 0),
+            'categories' => (int) ($taxonomyStats->categories ?? 0),
+            'tags' => (int) ($taxonomyStats->tags ?? 0),
+            'webhooks_today' => (int) ($webhookStats->today ?? 0),
+            'webhooks_failed' => (int) ($webhookStats->failed ?? 0),
+            'wordpress' => (int) ($contentStats->wordpress ?? 0),
+            'hostuk' => (int) ($contentStats->hostuk ?? 0),
+            'satellite' => (int) ($contentStats->satellite ?? 0),
         ];
     }
 
     /**
      * Get chart data for content over time (Flux chart format).
+     *
+     * Uses single query with GROUP BY instead of 30 separate queries.
      */
     #[Computed]
     public function chartData(): array
@@ -187,15 +217,23 @@ class ContentManager extends Component
         }
 
         $days = 30;
-        $data = [];
+        $startDate = now()->subDays($days - 1)->startOfDay();
 
+        // Single query with date grouping
+        $counts = ContentItem::forWorkspace($this->currentWorkspace->id)
+            ->where('created_at', '>=', $startDate)
+            ->selectRaw('DATE(created_at) as date, COUNT(*) as count')
+            ->groupBy('date')
+            ->pluck('count', 'date')
+            ->toArray();
+
+        // Build complete date range with zeros for missing dates
+        $data = [];
         for ($i = $days - 1; $i >= 0; $i--) {
-            $date = now()->subDays($i);
+            $date = now()->subDays($i)->toDateString();
             $data[] = [
-                'date' => $date->toDateString(),
-                'count' => ContentItem::forWorkspace($this->currentWorkspace->id)
-                    ->whereDate('created_at', $date)
-                    ->count(),
+                'date' => $date,
+                'count' => $counts[$date] ?? 0,
             ];
         }
 
@@ -220,6 +258,8 @@ class ContentManager extends Component
 
     /**
      * Get content grouped by status for Kanban board.
+     *
+     * Eager loads author and categories to prevent N+1 queries in view.
      */
     #[Computed]
     public function kanbanColumns(): array
@@ -236,6 +276,7 @@ class ContentManager extends Component
                 'status' => 'draft',
                 'color' => 'gray',
                 'items' => ContentItem::forWorkspace($id)
+                    ->with(['author', 'categories'])
                     ->where('status', 'draft')
                     ->orderBy('wp_modified_at', 'desc')
                     ->take(20)
@@ -246,6 +287,7 @@ class ContentManager extends Component
                 'status' => 'pending',
                 'color' => 'yellow',
                 'items' => ContentItem::forWorkspace($id)
+                    ->with(['author', 'categories'])
                     ->where('status', 'pending')
                     ->orderBy('wp_modified_at', 'desc')
                     ->take(20)
@@ -256,6 +298,7 @@ class ContentManager extends Component
                 'status' => 'future',
                 'color' => 'blue',
                 'items' => ContentItem::forWorkspace($id)
+                    ->with(['author', 'categories'])
                     ->where('status', 'future')
                     ->orderBy('wp_created_at', 'asc')
                     ->take(20)
@@ -266,6 +309,7 @@ class ContentManager extends Component
                 'status' => 'publish',
                 'color' => 'green',
                 'items' => ContentItem::forWorkspace($id)
+                    ->with(['author', 'categories'])
                     ->published()
                     ->orderBy('wp_created_at', 'desc')
                     ->take(20)
